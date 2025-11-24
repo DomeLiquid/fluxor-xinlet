@@ -146,3 +146,49 @@ export interface SwapOrder {
   state: SwapOrderState;
   created_at: string;
 }
+
+export interface MarketAssetInfo {
+  coin_id: string;
+  name: string;
+  symbol: string;
+  icon_url: string;
+  current_price: string;
+  market_cap: string;
+  market_cap_rank: string;
+  total_volume: string;
+  high_24h: string;
+  low_24h: string;
+  price_change_24h: string;
+  price_change_percentage_1h: string;
+  price_change_percentage_24h: string;
+  price_change_percentage_7d: string;
+  price_change_percentage_30d: string;
+  market_cap_change_24h: string;
+  market_cap_change_percentage_24h: string;
+  circulating_supply: string;
+  total_supply: string;
+  max_supply: string;
+  ath: string;
+  ath_change_percentage: string;
+  ath_date: string;
+  atl: string;
+  atl_change_percentage: string;
+  atl_date: string;
+  asset_ids: string[];
+  sparkline_in_7d: string;
+  sparkline_in_24h: string;
+  updated_at: string;
+  key: string;
+}
+
+export interface HistoricalPriceDatum {
+  price: string;
+  unix: number;
+}
+
+export interface HistoricalPrice {
+  coin_id: string;
+  type: string;
+  data: HistoricalPriceDatum[];
+  updated_at: string;
+}

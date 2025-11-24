@@ -25,6 +25,9 @@ import type {
   SwapOrder,
   RouteErrorResponse,
   MixinRouteAPIError,
+  MarketAssetInfo,
+  HistoricalPrice,
+  HistoryPriceType,
 } from "@/types/mixin-route.types";
 
 export const MIXIN_ROUTE_API_PREFIX = "https://api.route.mixin.one";
@@ -442,6 +445,35 @@ export class Web3Client {
 
   async getSwapOrder(orderId: string): Promise<SwapOrder> {
     return this.get<SwapOrder>(`/web3/swap/orders/${orderId}`);
+  }
+
+  /**
+   * Get asset market information
+   * @param assetId - Asset ID (coin_id from GET /markets, or mixin asset id)
+   * @returns Market asset information
+   */
+  async getAssetInfo(assetId: string): Promise<MarketAssetInfo> {
+    return this.get<MarketAssetInfo>(`/markets/${assetId}`);
+  }
+
+  /**
+   * Get asset price history
+   * @param assetId - Asset ID (coin_id from GET /markets, or mixin asset id)
+   * @param type - History type (1D, 1W, 1M, YTD, ALL)
+   * @returns Historical price data
+   */
+  async getPriceHistory(
+    assetId: string,
+    type: HistoryPriceType
+  ): Promise<HistoricalPrice> {
+    const query = new URLSearchParams({
+      type: type,
+    }).toString();
+
+    return this.get<HistoricalPrice>(
+      `/markets/${assetId}/price-history`,
+      query
+    );
   }
 }
 

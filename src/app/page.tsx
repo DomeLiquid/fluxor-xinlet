@@ -6,6 +6,9 @@ import useMixin from "@/hooks/useMixin";
 import MixinWallet from "@/components/MixinWallet";
 import AssetList from "@/components/AssetList";
 import ExchangePanel from "@/components/ExchangePanel";
+import TabBar from "@/components/TabBar";
+import BulkSwap from "@/components/BulkSwap";
+import SplitSwap from "@/components/SplitSwap";
 
 export default function Home() {
   const { user, clear } = useAppStore();
@@ -71,9 +74,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen pb-20 md:pb-4 max-w-4xl mx-auto">
-      <div className="p-4">
-        <header className="flex justify-between items-center mb-8">
+    <div className="min-h-screen pb-20 md:pb-4">
+      <div className="max-w-4xl mx-auto">
+        <header className="flex justify-between items-center mb-6 px-4 pt-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-900">Fluxor Mini</h1>
             <p className="text-gray-600">Welcome back, {user?.full_name}</p>
@@ -87,14 +90,30 @@ export default function Home() {
           </button>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2">
-            <AssetList />
-          </div>
-          <div className="lg:col-span-1">
-            <ExchangePanel />
-          </div>
-        </div>
+        <TabBar>
+          {(activeTab) => (
+            <div className="px-4 pb-4">
+              {activeTab === 'exchange' && (
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <div className="lg:col-span-2">
+                    <AssetList />
+                  </div>
+                  <div className="lg:col-span-1">
+                    <ExchangePanel />
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'bulkSwap' && (
+                <BulkSwap />
+              )}
+
+              {activeTab === 'splitSwap' && (
+                <SplitSwap />
+              )}
+            </div>
+          )}
+        </TabBar>
       </div>
 
       {/* Mobile bottom tab bar */}

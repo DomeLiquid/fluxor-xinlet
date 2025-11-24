@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Toaster } from 'react-hot-toast'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,6 +21,7 @@ export default function RootLayout({
         <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
           {children}
         </div>
+        <Toaster position="top-center" />
       </body>
     </html>
   )

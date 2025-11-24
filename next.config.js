@@ -6,6 +6,7 @@ const nextConfig = {
     MIXIN_SESSION_ID: process.env.MIXIN_SESSION_ID,
     MIXIN_SERVER_PUBLIC_KEY: process.env.MIXIN_SERVER_PUBLIC_KEY,
     MIXIN_SESSION_PRIVATE_KEY: process.env.MIXIN_SESSION_PRIVATE_KEY,
+    MIXIN_REFER_USER_ID: process.env.MIXIN_REFER_USER_ID,
   },
 }
 

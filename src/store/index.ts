@@ -6,6 +6,7 @@ import {
   Keystore,
   UserResponse,
   SafeAsset,
+  AuthenticationUserResponse,
 } from "@mixin.dev/mixin-node-sdk";
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
@@ -28,7 +29,7 @@ export type MixinClient = ReturnType<typeof MixinApi>;
 
 interface ComputerState {
   // State
-  user?: UserResponse;
+  user?: AuthenticationUserResponse;
   keystore?: Keystore;
   balances: Record<string, UserAssetBalance>;
   balanceAddressMap: Record<string, UserAssetBalance>;

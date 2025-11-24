@@ -18,6 +18,9 @@ import type {
   SwapRespView,
   SwapOrder,
   MixinRouteAPIError,
+  MarketAssetInfo,
+  HistoricalPrice,
+  HistoryPriceType,
 } from "@/types/mixin-route.types";
 
 export class MixinSwapService {
@@ -149,6 +152,38 @@ export class MixinSwapService {
       return await this.client.getSwapOrder(params.orderId);
     } catch (error) {
       console.error("Failed to get swap order:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get asset market information
+   * @param params.assetId - Asset ID (coin_id from GET /markets, or mixin asset id)
+   * @returns Market asset information including price, market cap, volume, etc.
+   */
+  async getAssetInfo(params: { assetId: string }): Promise<MarketAssetInfo> {
+    try {
+      return await this.client.getAssetInfo(params.assetId);
+    } catch (error) {
+      console.error("Failed to get asset info:", error);
+      throw error;
+    }
+  }
+
+  /**
+   * Get asset price history
+   * @param params.assetId - Asset ID (coin_id from GET /markets, or mixin asset id)
+   * @param params.type - History type (1D, 1W, 1M, YTD, ALL)
+   * @returns Historical price data
+   */
+  async getPriceHistory(params: {
+    assetId: string;
+    type: HistoryPriceType;
+  }): Promise<HistoricalPrice> {
+    try {
+      return await this.client.getPriceHistory(params.assetId, params.type);
+    } catch (error) {
+      console.error("Failed to get price history:", error);
       throw error;
     }
   }
