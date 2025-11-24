@@ -471,6 +471,58 @@ export default function SplitSwap() {
       {selectedAssetId && (
         <div className="card p-6">
           <h3 className="text-lg font-semibold mb-4">卖出比例</h3>
+
+          {/* Asset Info */}
+          <div className="bg-blue-50 rounded-lg p-4 mb-4 border border-blue-200">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-3">
+                <img
+                  src={balances[selectedAssetId]?.asset?.icon_url}
+                  alt={balances[selectedAssetId]?.asset?.symbol}
+                  className="w-10 h-10 rounded-full"
+                  onError={(e) => {
+                    e.currentTarget.src = '/placeholder-icon.png'
+                  }}
+                />
+                <div>
+                  <div className="font-semibold text-gray-900">
+                    {balances[selectedAssetId]?.asset?.symbol}
+                  </div>
+                  <div className="text-sm text-gray-600">
+                    持有: {formatBalance(parseFloat(balances[selectedAssetId]?.total_amount || '0'), '')}
+                  </div>
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="text-sm text-gray-600">总价值</div>
+                <div className="font-semibold text-gray-900">
+                  {formatUSD(
+                    parseFloat(balances[selectedAssetId]?.total_amount || '0') *
+                    parseFloat(balances[selectedAssetId]?.asset?.price_usd || '0')
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-blue-200 pt-3">
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-sm text-gray-600 mb-1">将要卖出</div>
+                  <div className="font-bold text-lg text-blue-900">
+                    {formatBalance(swapSummary.sellAmount, '')} {balances[selectedAssetId]?.asset?.symbol}
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="text-sm text-gray-600 mb-1">卖出金额</div>
+                  <div className="font-bold text-lg text-blue-900">
+                    {formatUSD(swapSummary.totalSellValue)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Slider */}
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-600">卖出百分比</span>
